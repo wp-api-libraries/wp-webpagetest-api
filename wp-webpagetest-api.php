@@ -76,7 +76,7 @@ if ( ! class_exists( 'WebPagetestAPI' ) ) {
 		function run_test( $url ) {
 
 			if ( empty( $url ) ) {
-				return new WP_Error( 'response-error', __( "Please provide a URL.", "text-domain" ) );
+				return new WP_Error( 'response-error', __( 'Please provide a URL.', 'text-domain' ) );
 			}
 
 			$request = $this->base_uri . '?url=' . $url;
