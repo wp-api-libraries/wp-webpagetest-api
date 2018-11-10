@@ -37,6 +37,7 @@ if ( ! class_exists( 'WebPagetestAPI' ) ) {
 		 * __construct function.
 		 *
 		 * @access public
+		 * @param mixed $apikey API Key.
 		 * @return void
 		 */
 		public function __construct( $apikey ) {
@@ -56,7 +57,7 @@ if ( ! class_exists( 'WebPagetestAPI' ) ) {
 			$code = wp_remote_retrieve_response_code( $response );
 
 			if ( 200 !== $code ) {
-				return new WP_Error( 'response-error', sprintf( __( 'Server response code: %d', 'text-domain' ), $code ) );
+				return new WP_Error( 'response-error', sprintf( __( 'Server response code: %d', 'wp-webpagetest-api' ), $code ) );
 			}
 
 			$body = wp_remote_retrieve_body( $response );
@@ -73,13 +74,13 @@ if ( ! class_exists( 'WebPagetestAPI' ) ) {
 		 * @param mixed $url URL.
 		 * @return void
 		 */
-		function run_test( $url ) {
+		function run_test( $url, $args = array() ) {
 
 			if ( empty( $url ) ) {
-				return new WP_Error( 'response-error', __( 'Please provide a URL.', 'text-domain' ) );
+				return new WP_Error( 'response-error', __( 'Please provide a URL.', 'wp-webpagetest-api' ) );
 			}
 
-			$request = $this->base_uri . '?url=' . $url;
+			$request = $this->base_uri . '?url=' . $url . '&k=' . $this->apikey;
 
 			return $this->fetch( $request );
 
